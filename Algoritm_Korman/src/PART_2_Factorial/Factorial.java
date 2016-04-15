@@ -1,4 +1,4 @@
-package PART_2;
+package PART_2_Factorial;
 
 import java.util.Arrays;
 

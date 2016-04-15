@@ -1,4 +1,4 @@
-package PART_1;
+package PART_1_Linear_Search;
 
 import java.util.Arrays;
 
