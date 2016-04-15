@@ -46,18 +46,8 @@ public class Merge_Sort {
         int B[] = new int[n1 + 1];                       /** Инициализация В                                            */
         int C[] = new int[n2 + 1];                       /** Инициализация С                                            */
 
-
-        int l = 0;                                       /** Копируем А[p...q] в B[n1]                                  */
-        while (l < B.length) {
-            B[l] = A[p + l];
-            l++;
-        }
-
-        int t = 0;                                      /** Копируем A[q+1...r] в C[n2]                                 */
-        while (t < r - q) {
-            C[t] = A[t + q + 1];
-            t++;
-        }
+        System.arraycopy(A, p, B, 0, B.length - 1);      /** Копируем А[p...q] в B[n1]                                  */
+        System.arraycopy(A, q + 1, C, 0, C.length - 1);  /** Копируем A[q+1...r] в C[n2]                                */
 
         B[n1] = Integer.MAX_VALUE;                      /** Записываем огранечитель                                     */
         C[n2] = Integer.MAX_VALUE;                      /** Записываем огранечитель                                     */
