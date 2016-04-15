@@ -12,51 +12,64 @@ public class Merge_Sort {
         for (int i = 0; i < A.length; i++) {
             A[i] = (int)(Math.random() * 10);
         }
-        System.out.println(Arrays.toString(A));
-
-        /** SORT ARRAY */
-        Merge_Sort(A, 0, n);
 
         /** OUTPUT ARRAY */
         System.out.println(Arrays.toString(A));
 
+        /** SORT ARRAY */
+        Merge_Sort(A, 0, A.length -1);
+
+        /** OUTPUT SORT ARRAY */
+        System.out.println(Arrays.toString(A));
+
 
     }
 
+    /**
+     * @param A массив
+     * @param p начальный индекс массива.
+     * @param r конечный индекс массива.
+     */
     public static void Merge_Sort(int A[],int p, int r){
-        if (p >= r) return;
+        if (p >= r) return;                             /** Если на интервале не более одного элемента возвращаемся     */
         else {
-            int q = (p + r) / 2;
-            Merge_Sort(A, p, q);
-            Merge_Sort(A, q + 1, r);
-            Merge(A, p, q, r);
+            int q = (p + r) / 2;                        /** Ищем середину                                               */
+            Merge_Sort(A, p, q);                        /** Делим левую часть                                           */
+            Merge_Sort(A, q + 1, r);                    /** Делим правую часть                                          */
+            Merge(A, p, q, r);                          /** Вызываем слияние                                            */
         }
     }
 
-    public static void Merge(int A[],int p,int q,int r){
-        int n1 = q - p + 1;
-        int n2 = r - q;
-        int B[] = new int[n1 + 1];
-        int C[] = new int[n2 + 1];
+    public static void Merge(int A[],int p,int q,int r){ /** Сливает отсортированые масивы в единый подмассив A[p...q]  */
+        int n1 = q - p + 1;                              /** Размер левого временного массива                           */
+        int n2 = r - q;                                  /** Размер правого временного массива                          */
+        int B[] = new int[n1 + 1];                       /** Инициализация В                                            */
+        int C[] = new int[n2 + 1];                       /** Инициализация С                                            */
 
-        for(int i = p; i > q;i++){
-             B[i] = A[i];
+
+        int l = 0;                                       /** Копируем А[p...q] в B[n1]                                  */
+        while (l < B.length) {
+            B[l] = A[p + l];
+            l++;
         }
-        for(int i = q + 1; i > r ;i++){
-            C[i] = A[i];
+
+        int t = 0;                                      /** Копируем A[q+1...r] в C[n2]                                 */
+        while (t < r - q) {
+            C[t] = A[t + q + 1];
+            t++;
         }
-        B[n1] = Integer.MAX_VALUE;
-        C[n2] = Integer.MAX_VALUE;
+
+        B[n1] = Integer.MAX_VALUE;                      /** Записываем огранечитель                                     */
+        C[n2] = Integer.MAX_VALUE;                      /** Записываем огранечитель                                     */
 
         int i = 0,j = 0;
 
-        for(int k = p; k < r; k++){
-            if(B[i]<= C[j]){
-                A[k] = B[i];
-                i++;
-            } else{
-                A[k] = C[j];
-                j++;
+        for(int k = p; k < r + 1; k++){                 /** Записываем отсортированые масивы в массив A[p...q]          */
+            if (B[i]<= C[j]){
+                A[k] = B[i++];
+            }
+            else {
+                A[k] = C[j++];
             }
         }
 

@@ -1,7 +1,5 @@
 package PART_3_Binary_Search;
 
-import com.sun.org.apache.regexp.internal.RE;
-
 import java.util.Arrays;
 
 public class Recursive_Binary_Search {
